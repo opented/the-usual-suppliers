@@ -1,2 +1,5 @@
 -e git+https://github.com/pudo/monnet.git#egg=monnet
+Flask
+Flask-Script
+Flask-Assets
 
