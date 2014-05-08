@@ -1,0 +1,47 @@
+@mainColor: orange;
+@bgColor: #555;
+@shadeColor: lighten(@bgColor, 20%);
+@subtleColor: darken(@mainColor, 20%);
+
+@media (min-width: 940px) {
+    .container {
+        max-width: 900px;
+    }
+}
+
+body {
+    font-size: 1.6em;
+    background-color: @bgColor;
+    color: @mainColor;
+    font-family: 'Arvo', sans-serif;
+    font-weight: 400;
+}
+
+table.table.breakdown {
+    td.number, th.number {
+        text-align: right;
+    }
+
+    td {
+        border-top: 1px solid @subtleColor;
+    }
+
+    th {
+        border-top: none;
+    }
+}
+
+hr {
+    border-top: 1px solid @subtleColor;
+}
+
+.btn.btn-default {
+    background-color: @mainColor;
+    border: 1px solid @mainColor;
+}
+
+.pager.tus li > a {
+    border: 0;
+    background-color: @subtleColor;
+    color: @mainColor;
+}

@@ -8,7 +8,7 @@
   <title>{% block title %}(Untitled){% endblock %} - The Usual Suppliers</title>
 
   <meta name="og:site_name" content="The Usual Suppliers">
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
 
   {% assets filters="less,cssmin,cssrewrite", output="gen/style.css",
       "vendor/bootstrap/less/bootstrap.less",
@@ -23,6 +23,9 @@
 <body>
 
   <div class="container">
+    <header>
+      <h1>The Usual Suppliers</h1>
+    </header>
     {% block content %}{% endblock %}
   </div>
 
