@@ -1,0 +1,2 @@
+-e git+https://github.com/pudo/monnet.git#egg=monnet
+
