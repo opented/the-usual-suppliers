@@ -4,3 +4,5 @@
 env/*
 pyenv/*
 tus/static/vendor/*
+tus/static/.webassets*
+tus/static/gen/*

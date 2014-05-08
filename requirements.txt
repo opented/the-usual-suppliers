@@ -2,4 +2,5 @@
 Flask
 Flask-Script
 Flask-Assets
+cssmin
 
