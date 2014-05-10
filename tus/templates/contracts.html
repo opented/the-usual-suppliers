@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  European Procurement
+{% endblock %}
+
+{% block content %}
+  <table class="table table-condensed breakdown">
+    <tr>
+        <th>Date</th>
+        <th>Title</th>
+        <th>Supplier</th>
+        <th class="number">Total value</th>
+    </tr>
+    {% for row in results %}
+        <tr>
+            <td>{{row['document_oj_date'] }}</td>
+            <td><a href="{{row['document_doc_url'] }}">{{row['document_title_text'] or '' | truncate(50) }}</a></td>
+            <td>{{row['contract_operator_official_name'] or '' | truncate(50) }}</td>
+            <td class="number">{{row['contract_total_value_cost_eur'] | currency }}</td>
+        </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

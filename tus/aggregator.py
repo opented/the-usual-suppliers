@@ -105,7 +105,7 @@ def aggregate(group_by=[], order_by=[('total_value_cost_eur', 'desc'), ], _filte
         ]
 
     _filters.append(contract_alias.c.doc_no == document_alias.c.doc_no)
-    _filters.append(contract_alias.c.doc_no != None)
+    _filters.append(contract_alias.c.total_value_cost_eur != None)
     _filters.append(contract_alias.c.total_value_currency == 'EUR')
     _filters = and_(*_filters)
     
@@ -130,4 +130,45 @@ def aggregate(group_by=[], order_by=[('total_value_cost_eur', 'desc'), ], _filte
                group_by=_group_by, order_by=_order_by,
                limit=limit, offset=offset)
     return count, engine.query(q)
+
+
+def contracts_request():
+    filters = []
+
+    val = arg_default('value', '')
+    if val:
+        drilldown = arg_default('drilldown', '')
+        if drilldown:
+            f = name_to_field(drilldown) == val
+            filters.append(f)
+
+    country = arg_default('country', '')
+    if country:
+        f = document_alias.c.iso_country == country
+        filters.append(f)
+
+    return list_contracts(_filters=filters)
+
+
+def list_contracts(_filters=[]):
+    _filters = list(_filters)
+
+    _fields = [
+        document_alias.c.doc_url,
+        document_alias.c.title_text,
+        document_alias.c.oj_date,
+        contract_alias.c.total_value_cost_eur,
+        contract_alias.c.operator_official_name
+    ]
+
+    _filters.append(contract_alias.c.doc_no == document_alias.c.doc_no)
+    _filters.append(contract_alias.c.doc_no != None)
+    #_filters.append(contract_alias.c.total_value_currency == 'EUR')
+    _filters = and_(*_filters)
+    
+    _order_by = [document_alias.c.oj_date.asc()]
+    
+    q = select(_fields, _filters, _tables, use_labels=True,
+               order_by=_order_by)
+    return engine.query(q)
 
